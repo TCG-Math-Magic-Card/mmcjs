@@ -15,10 +15,6 @@ export default {
             name: "cn.ttf",
             type: "relative",
         },
-        number: {
-            name: "number.ttf",
-            type: "relative",
-        },
     },
     style: Object.assign(JSON.parse(commonStyle), {
         fontMap: {

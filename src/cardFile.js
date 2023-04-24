@@ -1,6 +1,22 @@
+import { Cloud } from "./ajax";
+
+const YGOCARDDATA = "__MATHMAGICCARDDATA__";
 export default class CardFile {
     constructor(admin) {
         this.admin = admin;
+        if (!window[YGOCARDDATA]) {
+            window[YGOCARDDATA] = {};
+        }
+        if (!window[YGOCARDDATA].fontMap) {
+            let fontBox = document.createElement("div");
+            fontBox.style.width = "0";
+            fontBox.style.height = "0";
+            fontBox.style.overflow = "hidden";
+            document.body.appendChild(fontBox);
+            window[YGOCARDDATA].fontMap = {
+                fontBox,
+            };
+        }
     }
 
     draw(...arg) {
@@ -15,6 +31,11 @@ export default class CardFile {
         // 加载背景
         // 获取要加载的图片的列表
         // 加载字体文件
+        await this.loadFonts(this.admin.config.fonts).then(() => {
+            setTimeout(() => {
+                this.draw();
+            }, 1000);
+        });
     }
 
     async getFiles(files) {
@@ -97,5 +118,85 @@ export default class CardFile {
         res.mold = path + "frame/mold_frame.png";
         // TODO 这里要配置生成 Type的图片
         return res;
+    }
+
+    async loadFont(url, name) {
+        if (window[YGOCARDDATA].fontMap[name] === 1) {
+            var css = document.createElement("style");
+            css.setAttribute("type", "text/css");
+            css.setAttribute("crossOrigin", "anonymous");
+            css.setAttribute("class", name);
+            let data =
+                `
+          @font-face {
+            font-family: '` +
+                name +
+                `';
+            src: url('` +
+                url +
+                `');
+          }`;
+            css.appendChild(document.createTextNode(data));
+            document.head.appendChild(css);
+
+            let p = document.createElement("p");
+            p.innerText = "MMC";
+            p.style.fontFamily = name;
+            window[YGOCARDDATA].fontMap.fontBox.appendChild(p);
+
+            window[YGOCARDDATA].fontMap[name] = 2;
+
+            let font = await Cloud({
+                method: "GET",
+                path: url,
+            });
+
+            window[YGOCARDDATA].fontMap[name] = 3;
+            return font;
+        } else if (window[YGOCARDDATA].fontMap[name] === 2) {
+            let font = await Cloud({
+                method: "GET",
+                path: url,
+            });
+
+            window[YGOCARDDATA].fontMap[name] = 3;
+            return font;
+        }
+    }
+
+
+
+    loadFonts(fonts) {
+        for (let fontName in this.admin.config.fonts) {
+            if (!window[YGOCARDDATA].fontMap.hasOwnProperty(fontName)) {
+                window[YGOCARDDATA].fontMap[fontName] = 1;
+            }
+        }
+
+        let fontslist = [];
+        for (let fontName in fonts) {
+            if (window[YGOCARDDATA].fontMap[fontName] !== 3) {
+                let path;
+                if (fonts[fontName]["type"] === "relative") {
+                    path = this.admin.moldPath + "/font/" + fonts[fontName]["name"];
+                } else {
+                    path = fonts[fontName]["name"];
+                }
+
+                this.admin.fontLoaded({
+                    type: "font",
+                    status: true,
+                    content: fontName,
+                });
+
+                fontslist.push(this.loadFont(path, fontName));
+            }
+        }
+
+        return Promise.all(fontslist).then(() => {
+            this.admin.fontsLoaded({
+                type: "end",
+            });
+        });
     }
 }

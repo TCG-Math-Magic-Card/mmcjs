@@ -9,7 +9,7 @@ const config = {
         font: "name",
         fontSize: 65,
         maxWidth: 610,
-        position: [65, 96],
+        position: [65 + 18 + 9, 96 + 18],
     },
     formula: {
         font: "name",
@@ -20,10 +20,11 @@ const config = {
     },
     desc: {
         font: "desc",
-        position: [74 + 18, 845 + 18, 665 - 36, 262 - 57 - 20],
+        position: [74 + 18, 845 + 18 + 9, 665 - 36, 262 - 57 - 20],
         maxWidth: 665 - 36,
         fontSize: 24,
         maxLines: 6,
+        lineHeight: 26,
     },
     type: [363, 1033, 87, 87]
 }
