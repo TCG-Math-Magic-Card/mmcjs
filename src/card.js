@@ -1,7 +1,7 @@
 import CardDrawer from "./cardDrawer";
 import CardFile from "./cardFile";
 
-import * as defaultConfig from "./config/defualtConfig";
+import defaultConfig from "./config/defualtConfig";
 
 const defaultEvent = () => null;
 
@@ -25,7 +25,7 @@ export class Card {
         this.data = data;
         this.config = config;
         this.key = data._id;// 这个值暂时不使用
-
+        console.log(config);
         if (moldPath[moldPath.length - 1] === "/") {
             moldPath = moldPath.substring(0, moldPath.length - 1);
         }
@@ -87,7 +87,7 @@ export class Card {
         // 设置绘画类
         this.cardDrawer = new CardDrawer(this);
         // 设置要加载的文件类
-        this.cardFile = new CardFile(this); 
+        this.cardFile = new CardFile(this);
     }
 
     rounded(num) {
@@ -105,7 +105,7 @@ export class Card {
     draw(size, config) {
         console.log('test')
         if (this.renderState) {
-          this.cardDrawer.draw(this.data, this.cardFile.fileContent, size, config);
+            this.cardDrawer.draw(this.data, this.cardFile.fileContent, size, config);
         }
     }
 
@@ -165,5 +165,5 @@ export class Card {
 }
 
 export const configs = {
-    defualt:defaultConfig
+    defualt: defaultConfig
 };
