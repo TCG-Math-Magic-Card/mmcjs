@@ -1,4 +1,5 @@
 import CardDrawer from "./cardDrawer";
+import CardFile from "./cardFile";
 
 const defaultEvent = () => null;
 
@@ -84,6 +85,13 @@ export class Card {
         // 设置绘画类
         this.cardDrawer = new CardDrawer(this);
         // 设置要加载的文件类
+        this.cardFile = new CardFile(this); 
+    }
+
+    draw(size, config) {
+        if (this.renderState) {
+          this.cardDrawer.draw(this.data, this.cardFile.fileContent, size, config);
+        }
     }
 
     rounded(num) {
@@ -93,9 +101,9 @@ export class Card {
         return rounded;
     }
 
-
     render() {
         // 这里才进行绘制
+        this.cardFile.loadAll();
     }
 
     resize(delay = 500) {
