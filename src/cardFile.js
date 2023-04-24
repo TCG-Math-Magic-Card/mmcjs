@@ -7,6 +7,9 @@ export default class CardFile {
         if (!window[YGOCARDDATA]) {
             window[YGOCARDDATA] = {};
         }
+        if (!window[YGOCARDDATA].cardPicCache) {
+            window[YGOCARDDATA].cardPicCache = {};
+        }
         if (!window[YGOCARDDATA].fontMap) {
             let fontBox = document.createElement("div");
             fontBox.style.width = "0";
@@ -23,12 +26,62 @@ export default class CardFile {
         this.admin.draw(...arg);
     }
 
+    async loadCardPic() {
+        let url = this.admin.getPic(this.admin.data._id);
+        const cardPicCache = window[YGOCARDDATA].cardPicCache;
+        if (cardPicCache.hasOwnProperty(url)) {
+            let res = cardPicCache[url];
+            if (res instanceof Promise) {
+                await res.then((pic) => {
+                    this.fileContent.pic = pic;
+                });
+            } else {
+                this.fileContent.pic = res;
+            }
+        } else {
+            cardPicCache[url] = new Promise((resolve) => {
+                this.getCorsPic(url)
+                    .then((pic) => {
+                        this.fileContent.pic = pic;
+                        cardPicCache[url] = pic;
+                    })
+                    .finally(() => {
+                        resolve();
+                    });
+            });
+
+            await cardPicCache[url];
+        }
+
+        this.admin.picLoaded();
+
+        return true;
+    }
+
+
+    getCorsPic(url) {
+        return Cloud({
+            method: "GET",
+            path: url,
+            responseType: "blob",
+        })
+            .then((blob) => {
+                let base64 = URL.createObjectURL(blob);
+                return this.download(base64);
+            })
+            .catch((e) => console.log(e));
+    }
+
+
     async loadAll() {
         this.fileContent = await this.getFiles(this.fileList);
         this.admin.renderState = true;
         this.draw();
         // 加载全部的图片
         // 加载背景
+        this.loadCardPic().then(() => {
+            this.draw();
+        });
         // 获取要加载的图片的列表
         // 加载字体文件
         await this.loadFonts(this.admin.config.fonts).then(() => {

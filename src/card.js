@@ -5,6 +5,9 @@ import defaultConfig from "./config/defualtConfig";
 
 const defaultEvent = () => null;
 
+export const getPicFromGitee = (id) => `https://ymssx.gitee.io/pics/500/${id}.jpg`;
+export const getPICFromTest = (id) => `http://localhost:8080/pic/${id}.jpg`;
+
 export class Card {
     constructor({
         data,
@@ -12,6 +15,7 @@ export class Card {
         size,
         config = defaultConfig,
         moldPath = "./mold",
+        getPic = getPICFromTest,
         fontLoaded = defaultEvent,
         imageLoaded = defaultEvent,
         fontsLoaded = defaultEvent,
@@ -25,7 +29,8 @@ export class Card {
         this.data = data;
         this.config = config;
         this.key = data._id;// 这个值暂时不使用
-        console.log(config);
+        this.getPic = getPic;
+        // console.log(config);
         if (moldPath[moldPath.length - 1] === "/") {
             moldPath = moldPath.substring(0, moldPath.length - 1);
         }

@@ -15,6 +15,23 @@ export default class CardDrawer {
         this.admin.canvas.height = size[1];
         const r = size[0] / config.moldSize[0];
         const c = this.canvas;
+
+        // 绘制图片
+        try {
+            if (fileContent.pic) {
+                c.drawImage(
+                    fileContent.pic,
+                    config.pic[0] * r,
+                    config.pic[1] * r,
+                    config.pic[2] * r,
+                    config.pic[3] * r
+                );
+            }
+        } catch (err) {
+            console.error(err)
+            return;
+        }
+
         // 绘制基本骨架
         // draw card frame
         try {
