@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DEMO</title>
+</head>
+<body>
+  <canvas id="card" style="height: 90vh;"></canvas>
+</body>
+<script src="./packages/browser/dist/index.js"></script>
+<script>
+  const canvas = document.getElementById('card');
+  const data = {
+    _id: '000001',
+    name: '最初的数字1',
+    type: 'value',
+    desc: '范畴:自然数/奇数\r\n' +
+      '这张卡不用同调召唤不能特殊召唤。①：这张卡在同1次的战斗阶段中可以作出最多有那些作为同调素材的怪兽之内除调整以外的怪兽数量的攻击。②：1回合1次，魔法·陷阱·怪兽的效果发动时才能发动。那个发动无效并破坏。③：表侧表示的这张卡从场上离开时才能发动。从额外卡组把1只「流星龙」特殊召唤。',
+    vp: 1,
+    dp: 1,
+    formula: '',
+  };
+
+  const card = new Card({
+    data, canvas,
+    moldPath: './packages/browser/dist/mold',
+    config: configs.cnWeb,
+  });
+  
+  card.render();
+</script>
+</html>
