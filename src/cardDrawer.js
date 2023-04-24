@@ -51,7 +51,55 @@ export default class CardDrawer {
                 config.name.position[1] * r,
                 config.name.maxWidth * r
             );
+            // let outlineColor = "#888";
+            // let outlineWidth = 1.2;
+            // if (outlineColor && outlineWidth) {
+            //     c.strokeStyle = outlineColor;
+            //     c.lineWidth = outlineWidth * r;
+            //     c.strokeText(
+            //         cardData.name,
+            //         config.name.position[0] * r,
+            //         config.name.position[1] * r,
+            //         config.name.maxWidth * r
+            //     );
+            // }
         }
+        // 设置胜利点数 或者失败点数
+        let pv_font = 'en_name';
+        if (data.vp) {
+            c.save();
+            c.fillStyle = cardData.color;
+            c.textBaseline = "middle";
+            c.font =
+                26 * r +
+                "px " +
+                pv_font;
+
+            c.fillText(
+                `VP: ${data.vp}`,
+                config.vp[0] * r,
+                config.vp[1] * r,
+                300 * r
+            );
+        }
+
+        if (data.dp) {
+            c.save();
+            c.fillStyle = cardData.color;
+            c.textBaseline = "middle";
+            c.font =
+                26 * r +
+                "px " +
+                pv_font;
+
+            c.fillText(
+                `DP: ${data.dp}`,
+                config.dp[0] * r,
+                config.dp[1] * r,
+                300 * r
+            );
+        }
+
         // 这里显示 描述
         if (data.desc) {
             let descConfig = config.desc;

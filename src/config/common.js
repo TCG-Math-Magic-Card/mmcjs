@@ -26,7 +26,9 @@ const config = {
         maxLines: 6,
         lineHeight: 26,
     },
-    type: [363, 1033, 87, 87]
+    type: [363, 1033, 87, 87],
+    vp: [74 + 18, 845 + 9 + 230],
+    dp: [74 + 383 + 18, 845 + 9 + 230],
 }
 
 export default JSON.stringify(config);
