@@ -1,14 +1,16 @@
 import CardDrawer from "./cardDrawer";
 import CardFile from "./cardFile";
 
+import * as defaultConfig from "./config/defualtConfig";
+
 const defaultEvent = () => null;
 
 export class Card {
     constructor({
         data,
         canvas,
-        config,
         size,
+        config = defaultConfig,
         moldPath = "./mold",
         fontLoaded = defaultEvent,
         imageLoaded = defaultEvent,
@@ -88,12 +90,6 @@ export class Card {
         this.cardFile = new CardFile(this); 
     }
 
-    draw(size, config) {
-        if (this.renderState) {
-          this.cardDrawer.draw(this.data, this.cardFile.fileContent, size, config);
-        }
-    }
-
     rounded(num) {
         let rounded = (0.5 + num) | 0;
         rounded = ~~(0.5 + num);
@@ -104,6 +100,13 @@ export class Card {
     render() {
         // 这里才进行绘制
         this.cardFile.loadAll();
+    }
+
+    draw(size, config) {
+        console.log('test')
+        if (this.renderState) {
+          this.cardDrawer.draw(this.data, this.cardFile.fileContent, size, config);
+        }
     }
 
     resize(delay = 500) {
@@ -160,3 +163,7 @@ export class Card {
         return (window.devicePixelRatio || 1) / backingStore;
     }
 }
+
+export const configs = {
+    defualt:defaultConfig
+};

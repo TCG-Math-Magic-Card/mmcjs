@@ -7,12 +7,9 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.js",
-    "build": "webpack",
-    "test": "node ./test/render-test.js",
-    "pub": "./scripts/publish.sh"
+    "build": "webpack"
   },
   "dependencies": {
-    "canvas": "^2.6.1"
   },
   "keywords": [
     "card"
