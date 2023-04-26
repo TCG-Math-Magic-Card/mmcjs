@@ -10,6 +10,7 @@
     "build": "webpack"
   },
   "dependencies": {
+    "mathjax": "^3.2.2"
   },
   "keywords": [
     "card"

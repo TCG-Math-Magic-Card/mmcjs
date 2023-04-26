@@ -16,6 +16,12 @@ const config = {
     libraryTarget: 'umd'
   },
   mode: 'production',
+  resolve: {
+    alias: {
+      // katex: path.resolve(__dirname, 'node_modules/katex/dist/katex.min.js')
+      mathjax: path.resolve(__dirname, 'node_modules/mathjax/es5/tex-svg.js')
+    }
+  },
   module: {
     rules: []
   },

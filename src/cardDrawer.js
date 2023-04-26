@@ -51,6 +51,21 @@ export default class CardDrawer {
         } catch (e) {
             return;
         }
+        try{
+          if (cardData.svg){
+            c.drawImage(
+              cardData.svg,
+              config.formula.position[0] * r,
+              config.formula.position[1] * r,
+              config.formula.position[2] * r,
+              config.formula.position[3] * r,
+            );
+          }
+        }catch(err){
+          console.error(err);
+          return;
+        }
+
         // 这里是真实的绘制了！
         if (data.name) {
             const name_font = 'en' === data.lang ? 'en_name' : 'cn_simplify';

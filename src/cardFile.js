@@ -1,5 +1,6 @@
 import { Cloud } from "./ajax";
 
+
 const YGOCARDDATA = "__MATHMAGICCARDDATA__";
 export default class CardFile {
     constructor(admin) {
@@ -8,7 +9,7 @@ export default class CardFile {
             window[YGOCARDDATA] = {};
         }
         if (!window[YGOCARDDATA].cardPicCache) {
-            window[YGOCARDDATA].cardPicCache = {};
+            window[YGOCARDDATA].cardPicCache = {};  
         }
         if (!window[YGOCARDDATA].fontMap) {
             let fontBox = document.createElement("div");
@@ -83,6 +84,35 @@ export default class CardFile {
             this.draw();
         });
         // 获取要加载的图片的列表
+        if (this.admin.data.formula) {
+            mathjax({
+                loader: {
+                  load: ['input/tex', 'output/svg']
+                }
+              }).then((MathJax) => {
+                const svg = MathJax.tex2svg(this.admin.data.formula).toSVG();
+                const img = new Image();
+                img.src = 'data:image/svg+xml;base64,' + svg.toString('base64');
+                this.fileContent.svg = img;
+                img.onload = function() {
+                        this.draw();
+                };
+              });
+            //
+            // const options = {
+            //     displayMode: true,
+            //     throwOnError: false
+            //   };
+            // const svg = katex.renderToString(this.admin.data.formula, options);
+            // const img = new Image();
+            // img.src = 'data:image/svg+xml;base64,' + svg.toString('base64');
+            // console.log(svg);
+            // // this.fileContent.svg = img;
+            // img.onload = function() {
+            //     this.draw();
+            // };
+        }
+
         // 加载字体文件
         await this.loadFonts(this.admin.config.fonts).then(() => {
             setTimeout(() => {
