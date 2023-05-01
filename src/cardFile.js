@@ -217,6 +217,37 @@ export default class CardFile {
         let res = {};
         res.mold = path + "frame/mold_frame.png";
         // TODO 这里要配置生成 Type的图片
+        let typeUrl = path + "type/value.png";
+        if (data.type) {
+            switch (data.type) {
+                case 'value':
+                    // 值
+                    break;
+                case 'value-assertion':
+                    // 值-断言
+                    break;
+                case 'assertion':
+                    // 断言
+                    break;
+                case 'operator':
+                    // 算子
+                    break;
+                case 'operator-value':
+                    // 算子值
+                    break;
+                case 'function':
+                    // 函数
+                    break;
+                case 'legend':
+                    // 传奇卡
+                    break;
+                case 'rainbow':
+                    // 🌈彩虹传奇
+                    break;
+                default:
+            }
+            res.type = typeUrl;
+        }
         return res;
     }
 

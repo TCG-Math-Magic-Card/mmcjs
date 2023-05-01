@@ -172,6 +172,17 @@ export default class CardDrawer {
             }
         }
 
+        // 绘制type
+        if (fileContent.type) {
+            c.drawImage(
+                fileContent.type,
+                config.type[0] * r,
+                config.type[1] * r,
+                config.type[2] * r,
+                config.type[3] * r,
+            );
+        }
+
         // callbacks
         if (this.admin.loaded instanceof Function) {
             this.admin.loaded();
