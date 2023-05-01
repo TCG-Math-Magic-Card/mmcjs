@@ -62,6 +62,44 @@ export default class CardFile {
         return true;
     }
 
+    // 加载数据
+    async loadFormulaPic() {
+        // 如果指定了地址的话就不进行加载？
+        // fixme没有公式时的修复？
+        let url = this.admin.getPic(this.admin.data._id);
+        if (this.admin.data.formulaPic) {
+            url = this.admin.data.formulaPic;
+        }
+        const cardPicCache = window[YGOCARDDATA].cardPicCache;
+        if (cardPicCache.hasOwnProperty(url)) {
+            let res = cardPicCache[url];
+            if (res instanceof Promise) {
+                await res.then((pic) => {
+                    this.fileContent.formulaPic = pic;
+                });
+            } else {
+                this.fileContent.formulaPic = res;
+            }
+        } else {
+            cardPicCache[url] = new Promise((resolve) => {
+                this.getCorsPic(url)
+                    .then((pic) => {
+                        this.fileContent.formulaPic = pic;
+                        cardPicCache[url] = pic;
+                    })
+                    .finally(() => {
+                        resolve();
+                    });
+            });
+
+            await cardPicCache[url];
+        }
+
+        this.admin.picLoaded();
+
+        return true;
+    }
+
 
     getCorsPic(url) {
         return Cloud({
@@ -86,6 +124,11 @@ export default class CardFile {
         this.loadCardPic().then(() => {
             this.draw();
         });
+
+        // 加载公式图片
+        this.loadFormulaPic().then(() => {
+            this.draw();
+        })
         // 获取要加载的图片的列表
         // 加载字体文件
         await this.loadFonts(this.admin.config.fonts).then(() => {

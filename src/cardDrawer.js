@@ -51,6 +51,23 @@ export default class CardDrawer {
         } catch (e) {
             return;
         }
+
+        // 绘制公式图片
+        try {
+            if (fileContent.formulaPic) {
+                c.drawImage(
+                    fileContent.formulaPic,
+                    config.formula.position[0] * r,
+                    config.formula.position[1] * r,
+                    config.formula.position[2] * r,
+                    config.formula.position[3] * r
+                );
+            }
+        } catch (err) {
+            console.error(err)
+            return;
+        }
+
         // 这里是真实的绘制了！
         if (data.name) {
             const name_font = 'en' === data.lang ? 'en_name' : 'cn_simplify';

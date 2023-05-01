@@ -16,7 +16,7 @@ const config = {
         fontSize: 100,
         maxWidth: 710,
         // 顶点 宽 高
-        position: [33, 176, 747, 178]
+        position: [33 + 200, 176 + 20, 747 - 400, 178 - 40]
     },
     desc: {
         font: "desc",
