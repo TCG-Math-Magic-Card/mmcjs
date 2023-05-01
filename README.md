@@ -36,4 +36,6 @@
 - vp 胜利点数
 - dp 失败点数
 - pic 卡图 要求大小  (747 x 1119)
-- formulaPic 公式SVG.要求字体颜色为白色
+- formulaPic 公式SVG.要求字体颜色为白色 
+
+> 图片可以使用 texsvg cli生成
