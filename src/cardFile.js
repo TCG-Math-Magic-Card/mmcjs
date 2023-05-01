@@ -27,7 +27,11 @@ export default class CardFile {
     }
 
     async loadCardPic() {
+        // 如果指定了地址的话就不进行加载？
         let url = this.admin.getPic(this.admin.data._id);
+        if (this.admin.data.pic) {
+            url = this.admin.data.pic;
+        }
         const cardPicCache = window[YGOCARDDATA].cardPicCache;
         if (cardPicCache.hasOwnProperty(url)) {
             let res = cardPicCache[url];
