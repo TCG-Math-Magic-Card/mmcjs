@@ -225,24 +225,31 @@ export default class CardFile {
                     break;
                 case 'value-assertion':
                     // 值-断言
+                    typeUrl = path + "value-assertion.png";
                     break;
                 case 'assertion':
+                    typeUrl = path + "assertion.png";
                     // 断言
                     break;
                 case 'operator':
+                    typeUrl = path + "operator.png";
                     // 算子
                     break;
                 case 'operator-value':
                     // 算子值
+                    typeUrl = path + "operator-value";
                     break;
                 case 'function':
                     // 函数
+                    typeUrl = path + "function";
                     break;
                 case 'legend':
                     // 传奇卡
+                    typeUrl = path + "legend.png";
                     break;
                 case 'rainbow':
                     // 🌈彩虹传奇
+                    typeUrl = path + "rainbow.png";
                     break;
                 default:
             }
