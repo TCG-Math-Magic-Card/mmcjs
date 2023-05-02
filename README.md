@@ -1,6 +1,6 @@
 # 数学魔法卡显示使用的前端包
 
-![图片](demo/one.png)
+![图片](https://raw.githubusercontent.com/TCG-Math-Magic-Card/mmcjs/main/demo/one.png)
 
 
 # 使用方法
@@ -38,4 +38,4 @@
 - pic 卡图 要求大小  (747 x 1119)
 - formulaPic 公式SVG.要求字体颜色为白色 
 
-> 图片可以使用 texsvg cli生成
+> 图片可以使用 texsvg cli生成npm config
