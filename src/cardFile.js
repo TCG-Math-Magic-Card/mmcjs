@@ -181,6 +181,7 @@ export default class CardFile {
             img.src = file;
             img.setAttribute("crossOrigin", "anonymous");
             img.onload = function () {
+                console.log('图像加载完成')
                 resolve(img);
             };
             img.onerror = function (err) {
