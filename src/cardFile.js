@@ -122,12 +122,20 @@ export default class CardFile {
         // 加载全部的图片
         // 加载背景
         this.loadCardPic().then(() => {
+            console.log('图片加载成功');
             this.draw();
-        });
+        }).catch(err => {
+            console.info('图片加载失败');
+            console.error(err);
+        })
 
         // 加载公式图片
         this.loadFormulaPic().then(() => {
+            console.log('公式加载成功');
             this.draw();
+        }).catch(err => {
+            console.info('公式加载成功加载失败');
+            console.error(err);
         })
         // 获取要加载的图片的列表
         // 加载字体文件
