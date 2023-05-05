@@ -15,7 +15,7 @@ export default class CardDrawer {
         this.admin.canvas.height = size[1];
         const r = size[0] / config.moldSize[0];
         const c = this.canvas;
-
+        let data = cardData;
         // 绘制图片
         try {
             if (fileContent.pic) {
@@ -69,7 +69,7 @@ export default class CardDrawer {
         }
 
         // 这里是真实的绘制了！
-        if (cardData.name) {
+        if (data.name) {
             const name_font = 'en' === data.lang ? 'en_name' : 'cn_simplify';
             c.save();
             c.fillStyle = cardData.color;
