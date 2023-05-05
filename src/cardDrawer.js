@@ -47,6 +47,7 @@ export default class CardDrawer {
                     size[0],
                     size[1]
                 );
+                c.save();
             }
         } catch (e) {
             return;
@@ -62,6 +63,7 @@ export default class CardDrawer {
                     config.formula.position[2] * r,
                     config.formula.position[3] * r
                 );
+                c.save();
             }
         } catch (err) {
             console.error(err)
@@ -100,7 +102,7 @@ export default class CardDrawer {
         }
         // 设置胜利点数 或者失败点数
         let pv_font = 'en_name';
-        if (data.vp) {
+        if (data.vp !== undefined || data.vp !== null) {
             c.save();
             c.fillStyle = cardData.color;
             c.textBaseline = "middle";
@@ -117,7 +119,7 @@ export default class CardDrawer {
             );
         }
 
-        if (data.dp) {
+        if (data.dp !== undefined || data.dp !== null) {
             c.save();
             c.fillStyle = cardData.color;
             c.textBaseline = "middle";
