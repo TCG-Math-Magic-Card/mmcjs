@@ -74,10 +74,11 @@ export default class CardFile {
         if (cardPicCache.hasOwnProperty(url)) {
             let res = cardPicCache[url];
             if (res instanceof Promise) {
-                await res.then((pic) => {
-                    console.log('数据来自查询')
-                    this.fileContent.formulaPic = pic;
-                });
+                console.log('数据来自查询')
+                this.fileContent.formulaPic = await res;
+                // await res.then((pic) => {
+                //     this.fileContent.formulaPic = pic;
+                // });
             } else {
                 console.log('数据来自缓存')
                 this.fileContent.formulaPic = res;
