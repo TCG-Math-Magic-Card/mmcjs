@@ -69,7 +69,7 @@ export default class CardDrawer {
         }
 
         // 这里是真实的绘制了！
-        if (data.name) {
+        if (cardData.name) {
             const name_font = 'en' === data.lang ? 'en_name' : 'cn_simplify';
             c.save();
             c.fillStyle = cardData.color;
