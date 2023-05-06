@@ -119,6 +119,12 @@ export class Card {
         }
     }
 
+    feedData(data) {
+        for (let key in data) {
+            this.data[key] = data[key];
+        }
+    }
+
     resize(delay = 500) {
         if (this.resizer) {
             clearTimeout(this.resizer);
