@@ -12,7 +12,7 @@ export default class CardDrawer {
         callback
     ) {
         this.admin.canvas.width = size[0];
-        this.admin.canvas.height = size[1];
+        this.admin.canvas.height = ~~size[1];
         const r = size[0] / config.moldSize[0];
         const c = this.canvas;
         let data = cardData;
@@ -176,6 +176,7 @@ export default class CardDrawer {
 
         // 绘制type
         if (fileContent.type) {
+            c.save()
             c.drawImage(
                 fileContent.type,
                 config.type[0] * r,

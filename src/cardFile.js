@@ -75,10 +75,9 @@ export default class CardFile {
             let res = cardPicCache[url];
             if (res instanceof Promise) {
                 console.log('数据来自查询')
-                this.fileContent.formulaPic = await res;
-                // await res.then((pic) => {
-                //     this.fileContent.formulaPic = pic;
-                // });
+                await res.then((pic) => {
+                    this.fileContent.formulaPic = pic;
+                });
             } else {
                 console.log('数据来自缓存')
                 this.fileContent.formulaPic = res;
@@ -125,7 +124,7 @@ export default class CardFile {
         this.draw();
         // 加载全部的图片
         // 加载背景
-        this.loadCardPic().then(() => {
+        await this.loadCardPic().then(() => {
             console.log('图片加载成功');
             this.draw();
         }).catch(err => {
@@ -134,7 +133,7 @@ export default class CardFile {
         })
 
         // 加载公式图片
-        this.loadFormulaPic().then(() => {
+        await this.loadFormulaPic().then(() => {
             console.log('公式加载成功');
             this.draw();
         }).catch(err => {
