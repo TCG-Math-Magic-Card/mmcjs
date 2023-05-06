@@ -237,31 +237,31 @@ export default class CardFile {
                     break;
                 case 'value-assertion':
                     // 值-断言
-                    typeUrl = path + "value-assertion.png";
+                    typeUrl = path + "type/value-assertion.png";
                     break;
                 case 'assertion':
-                    typeUrl = path + "assertion.png";
+                    typeUrl = path + "type/assertion.png";
                     // 断言
                     break;
                 case 'operator':
-                    typeUrl = path + "operator.png";
+                    typeUrl = path + "type/operator.png";
                     // 算子
                     break;
                 case 'operator-value':
                     // 算子值
-                    typeUrl = path + "operator-value";
+                    typeUrl = path + "type/operator-value";
                     break;
                 case 'function':
                     // 函数
-                    typeUrl = path + "function";
+                    typeUrl = path + "type/function";
                     break;
                 case 'legend':
                     // 传奇卡
-                    typeUrl = path + "legend.png";
+                    typeUrl = path + "type/legend.png";
                     break;
                 case 'rainbow':
                     // 🌈彩虹传奇
-                    typeUrl = path + "rainbow.png";
+                    typeUrl = path + "type/rainbow.png";
                     break;
                 default:
             }
