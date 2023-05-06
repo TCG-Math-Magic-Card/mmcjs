@@ -110,6 +110,11 @@ export class Card {
     draw(size, config) {
         console.log('test')
         if (this.renderState) {
+            if (this.cardFile.fileContent.formulaPic == undefined
+                && this.cardFile.fileContent.pic == undefined) {
+                console.log("数据不全暂时不画")
+                return;
+            }
             this.cardDrawer.draw(this.data, this.cardFile.fileContent, size, config);
         }
     }

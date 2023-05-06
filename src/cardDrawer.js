@@ -12,7 +12,7 @@ export default class CardDrawer {
         callback
     ) {
         this.admin.canvas.width = size[0];
-        this.admin.canvas.height = ~~size[1];
+        this.admin.canvas.height = size[1];
         const r = size[0] / config.moldSize[0];
         const c = this.canvas;
         let data = cardData;
@@ -87,18 +87,6 @@ export default class CardDrawer {
                 config.name.position[1] * r,
                 config.name.maxWidth * r
             );
-            // let outlineColor = "#888";
-            // let outlineWidth = 1.2;
-            // if (outlineColor && outlineWidth) {
-            //     c.strokeStyle = outlineColor;
-            //     c.lineWidth = outlineWidth * r;
-            //     c.strokeText(
-            //         cardData.name,
-            //         config.name.position[0] * r,
-            //         config.name.position[1] * r,
-            //         config.name.maxWidth * r
-            //     );
-            // }
         }
         // 设置胜利点数 或者失败点数
         let pv_font = 'en_name';
