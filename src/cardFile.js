@@ -38,6 +38,7 @@ export default class CardFile {
             if (res instanceof Promise) {
                 await res.then((pic) => {
                     this.fileContent.pic = pic;
+                    cardPicCache[url] = pic;
                 });
             } else {
                 this.fileContent.pic = res;
@@ -48,10 +49,8 @@ export default class CardFile {
                     .then((pic) => {
                         this.fileContent.pic = pic;
                         cardPicCache[url] = pic;
+                        resolve(pic);
                     })
-                    .finally(() => {
-                        resolve();
-                    });
             });
 
             await cardPicCache[url];
@@ -83,16 +82,16 @@ export default class CardFile {
                 this.fileContent.formulaPic = res;
             }
         } else {
-            cardPicCache[url] = new Promise((resolve) => {
+            cardPicCache[url] = new Promise((resolve, reject) => {
                 this.getCorsPic(url)
                     .then((pic) => {
                         console.log('设置查询内容')
                         this.fileContent.formulaPic = pic;
                         cardPicCache[url] = pic;
+                        resolve(pic);
+                    }).catch(err => {
+                        reject(err)
                     })
-                    .finally(() => {
-                        resolve();
-                    });
             });
 
             await cardPicCache[url];

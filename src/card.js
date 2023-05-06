@@ -119,6 +119,12 @@ export class Card {
         }
     }
 
+    autoDraw() {
+        setInterval(() => {
+            this.draw();
+        }, 200);
+    }
+
     feedData(data) {
         for (let key in data) {
             this.data[key] = data[key];
